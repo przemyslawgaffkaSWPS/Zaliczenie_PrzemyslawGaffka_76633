@@ -16,7 +16,7 @@ class KlubPilkarski(models.Model):
     ])
 
     def __str__(self):
-        return self.nazwa  # Poprawione: `self.nazwa` zamiast `self.name`
+        return self.nazwa
 
 
 class Zawodnik(models.Model):
@@ -24,7 +24,7 @@ class Zawodnik(models.Model):
     nazwisko = models.CharField(max_length=15)
     data_urodzenia = models.DateField()
     narodowosc = models.CharField(max_length=15)
-    przynaleznosc_klubowa = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="zawodnicy")  # Poprawione `models.CASCADE`
+    przynaleznosc_klubowa = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="zawodnicy")
     pozycja = models.CharField(max_length=15)
 
     def __str__(self):
@@ -34,15 +34,15 @@ class Zawodnik(models.Model):
 class Trener(models.Model):
     imie = models.CharField(max_length=15)
     nazwisko = models.CharField(max_length=15)
-    trener_klubu = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="trener")  # Poprawione `models.CASCADE`
+    trener_klubu = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="trener")
 
     def __str__(self):
         return f"{self.imie} {self.nazwisko}"
 
 
 class Mecz(models.Model):
-    druzyna_gospodarzy = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="mecze_gospodarze")  # Poprawione `models.CASCADE`
-    druzyna_gosci = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="mecze_goscie")  # Poprawione `models.CASCADE`
+    druzyna_gospodarzy = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="mecze_gospodarze")
+    druzyna_gosci = models.ForeignKey(KlubPilkarski, on_delete=models.CASCADE, related_name="mecze_goscie")
     liczba_goli_gospodarzy = models.IntegerField()
     liczba_goli_gosci = models.IntegerField()
     data_meczu = models.DateField()
@@ -53,7 +53,7 @@ class Mecz(models.Model):
 
 
 class Statystyki(models.Model):
-    klub = models.OneToOneField(KlubPilkarski, on_delete=models.CASCADE, related_name="statystyki")  # Poprawione `models.CASCADE`
+    klub = models.OneToOneField(KlubPilkarski, on_delete=models.CASCADE, related_name="statystyki")
     liczba_punktow = models.IntegerField(default=0)
     liczba_meczow = models.IntegerField(default=0)
     mecze_wygrane = models.IntegerField(default=0)

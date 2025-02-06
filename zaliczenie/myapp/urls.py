@@ -7,7 +7,8 @@ from myapp.views import (
     TrenerViewSet,
     MeczViewSet,
     StatystykiViewSet,
-    kluby,  # Funkcja kluby do renderowania strony
+    kluby,
+    index,
 )
 
 router = DefaultRouter()
@@ -19,9 +20,10 @@ router.register(r"statystyki", StatystykiViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
+    path("kluby/", kluby, name="kluby"),
+    path("", index, name="index"),
 ]
 
 urlpatterns += [
     path("api/token/", obtain_auth_token, name="api_token_auth"),
-    path("kluby/", kluby, name="kluby"),  # ✅ Teraz Django znajdzie funkcję kluby!
 ]

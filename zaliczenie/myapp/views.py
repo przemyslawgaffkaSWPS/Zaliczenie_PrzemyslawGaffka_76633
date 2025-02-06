@@ -5,9 +5,21 @@ from rest_framework import viewsets
 from .models import KlubPilkarski, Zawodnik, Trener, Mecz, Statystyki
 from .serializers import KlubPilkarskiSerializer, ZawodnikSerializer, TrenerSerializer, MeczSerializer, StatystykiSerializer
 
+def index(requests):
+    return render(requests, "index.html")
+
+def kluby(request):
+    kluby = KlubPilkarski.objects.all()
+    return render(request, 'kluby.html', {'kluby': kluby})
+
 class KlubPilkarskiViewSet(viewsets.ModelViewSet):
     queryset = KlubPilkarski.objects.all()
     serializer_class = KlubPilkarskiSerializer
+
+    def get_permissions(self):
+        if self.action in ['create', 'update', 'destroy']:
+            return [IsAdminUser()]
+        return [IsAuthenticated()]
 
     @action(detail=False, methods=['get'])
     def ranking(self, request):
@@ -37,7 +49,3 @@ class MeczViewSet(viewsets.ModelViewSet):
 class StatystykiViewSet(viewsets.ModelViewSet):
     queryset = Statystyki.objects.all()
     serializer_class = StatystykiSerializer
-
-def kluby(request):
-    kluby = KlubPilkarski.objects.all()
-    return render(request, 'kluby.html', {'kluby': kluby})

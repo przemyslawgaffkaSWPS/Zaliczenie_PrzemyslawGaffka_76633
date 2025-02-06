@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>76633</title>
+    <style>
+        body {
+            background-image: url("https://images.unsplash.com/photo-1534156039819-c89418369a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            color: #de5cc7;
+            border: 20px black;
+            font-size: 3vw;
+            text-shadow: 10px 12px 15px #687efe;
+            margin-bottom: 30px;
+        }
+
+        .kategorie {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .kategorie a {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: xx-large;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+    background: black;
+}
+
+.kategorie a::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 30px;
+    background: linear-gradient(to right, #ff7f5d, #de5cc7, #687efe);
+    z-index: -1;
+}
+
+.kategorie a:hover {
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <h1>Witaj, wybierz opcję:</h1>
+    <div class="kategorie">
+        <a href="{% url 'kluby' %}">Lista Klubów</a>
+        <a href="/admin/">Panel Administratora</a>
+        <a href="/api/">API</a>
+    </div>
+</body>
+</html>
