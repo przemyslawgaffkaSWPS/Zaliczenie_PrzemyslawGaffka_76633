@@ -54,12 +54,14 @@ class Mecz(models.Model):
 
 class Statystyki(models.Model):
     klub = models.OneToOneField(KlubPilkarski, on_delete=models.CASCADE, related_name="statystyki")  # Poprawione `models.CASCADE`
+    liczba_punktow = models.IntegerField(default=0)
     liczba_meczow = models.IntegerField(default=0)
     mecze_wygrane = models.IntegerField(default=0)
     mecze_zremisowane = models.IntegerField(default=0)
     mecze_przegrane = models.IntegerField(default=0)
     bramki_strzelone = models.IntegerField(default=0)
     bramki_stracone = models.IntegerField(default=0)
+    
 
     def __str__(self):
         return f"Statystyki {self.klub.nazwa}"
